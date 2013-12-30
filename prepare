@@ -1,0 +1,19 @@
+#! /bin/bash
+
+version=3.0
+working_dir=current
+previous_dir=previous
+zip_name=latest.zip
+
+if [ -e $zip_name ]; then
+	rm $zip_name
+fi
+wget --no-check-certificate http://files.pharo.org/image/30/$zip_name
+rm -Rf $previous_dir
+mv $working_dir $previous_dir
+unzip -d $working_dir $zip_name  
+mv $working_dir/Pharo*.image $working_dir/Pharo.image
+mv $working_dir/Pharo*.changes $working_dir/Pharo.changes
+cp PharoPass.txt $working_dir/PharoPass.txt
+./scripts/getupdateslist.sh
+pharo $working_dir/Pharo.image

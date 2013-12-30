@@ -1,0 +1,10 @@
+#! /bin/bash
+
+version=3.0
+updates_dir=./pharo-update
+current_dir=current
+previous_dir=previous
+
+cp $current_dir/*.cs $updates_dir
+cp $current_dir/*.staged $updates_dir
+./scripts/publish.sh
